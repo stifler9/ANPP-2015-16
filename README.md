@@ -1,14 +1,19 @@
 # Analiza La Lige
 
 Avtor: Žan Šifrer
+
 Mentor: Janoš Vidali
+
 Odločil sem se, da naredim analizo podatkov španske nogometne La Lige. Naredil bom analizo v letu 2014/15.
 
 ## Cilj
 
-Cilj je narediti različne analize ekip med seboj (koliko točk so dosegli, koliko je bilo od tega zmag in tudi kakšne so bile zmage ali porazi in gol razlike, katere ekipe več tvegajo, dosegajo več golov na tekmo, katere so bolj odvisne od tega ali igrajo doma ali v gosteh, ...). Podatke si bom pridobil na spletu:
-http://www.soccerstats.com/latest.asp?league=spain_2015
-https://en.wikipedia.org/wiki/2014%E2%80%9315_La_Liga
+Cilj je narediti različne analize ekip med seboj (koliko točk so dosegli, koliko je bilo od tega zmag in tudi kakšne so bile zmage ali porazi in gol razlike, katere ekipe več tvegajo, dosegajo več golov na tekmo, katere so bolj odvisne od tega ali igrajo doma ali v gosteh, ...). 
+
+Podatke si bom pridobil na spletu:
+
+* http://www.soccerstats.com/latest.asp?league=spain_2015
+* https://en.wikipedia.org/wiki/2014%E2%80%9315_La_Liga
 
 ## Program
 
