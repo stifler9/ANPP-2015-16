@@ -1,0 +1,1 @@
+Prikaz <- ggplot(data=podatki) + aes(x=Position, y=Points) + geom_line()
