@@ -39,7 +39,7 @@ Uvozil sem podatke iz spletnih strani tako da sem lestvico in pozicije po posame
 
 Dodal sem stolpce z razmerjem med zmagami in porazi, koliko golov je na njihovih tekmah in v koliko procentih igrajo izenačen izid.
 ```{r podatki}
-podatki[c(2,3,4,5,6,7,8,9)]
+podatki[c(2,3,4,5,6,9)]
 ```
 
 ```{r razpredelnice}
@@ -51,7 +51,21 @@ podatki[c(2,3,4,5,6,7,8,9)]
 ggplot(data=podatki , aes(x=Position,y=Points))+ geom_point(aes(size= fillgolrazlika),colour="red")
 ```
 
-Graf prikazuje 
+Graf prikazuje koliko točk so dosegle ekipe po vrsti in velikost točk nam pove kako dobro gol razliko so dosegli. iz njega lahko razberemo kako se ekipe razlikujejo od najboljše do najslabše, videti je da Barcelona in Real madrid dosti izstopata od ostalih ekip, namreč Real Madrid je 14 točk pred tretjeuvrščenim Atletico Madridom, ki pa je skupaj z Valencio in Sevillio tudi dosti oddaljen od ostalih ekip, ki nekako enakomerno padajo. Vidi se tudi da gol razlike pribljižno enakomerno padajo, razen pri zadnjih 7ih ekipah nekako nihajo.
+
+```{r zmage proti porazom}
+ggplot(data=podatki , aes(x=Position,y=Wins/Loses))+ geom_line(aes(size=Draws/Played))
+```
+
+Pri naslednjem grafu je prikazano razmerje med zmagami in porazi, debelina črt pa je delež izenačenih izidov. kot vidimo v temu razmerju kar močno izstopa vodilna ekipa Barcelona, Real Madrid je za njo samo 2 točki, ampak ker imajo vodilne ekipe veliko zmag in malo porazov sta 2 poraza več povzročila tak padec, imeli so pa najmanj izenačenih izidov, kar se tudi vidi po debelini črte. Atletico Madrid je imel slabše razmerje med zmagami in porazi od četrteuvrščene Valencie, ki je dosegla 1 zmago in en poraz manj. Do nekje 7-ga mesta je to razmerje močno padlo, pri ostalih ekipah pa so le manjše razlike.
+
+```{r dani goli proti prejetim}
+FA = podatki$'Goals For'/podatki$'Goals Against'
+gpm = podatki$`Goals per match`
+ggplot(data=podatki , aes(x=Position,y=FA))+ geom_line(aes(size=gpm,color="blue"))
+```
+
+
 
 ```{r histogram, echo=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
 #hist(obcine[,4], main = "Pogostost števila naselij",

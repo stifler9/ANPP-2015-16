@@ -23,7 +23,10 @@ names(podatki)[1] <- "Position"
 names(podatki)[3] <- "Played"
 podatki$'Win/Lose' <- podatki$Wins/podatki$Loses
 podatki$'Goals per match' <- (podatki$`Goals For`+podatki$`Goals Against`)/podatki$Played
+podatki$'Draw percentage' <- round((podatki$Draws/podatki$Played)*100, 2)
 summary(podatki)
+fillgolrazlika <- c(podatki$`Goal Difference` + 50)
+pozicije <- read.csv(file="podatki/LaLiga_pozicije.csv", encoding = "Windows-1250")
 
 
 # Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi
