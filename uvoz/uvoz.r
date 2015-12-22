@@ -1,15 +1,13 @@
 # 2. faza: Uvoz podatkov
 
 # Funkcija, ki uvozi podatke iz datoteke druzine.csv
-podatki <- function() {
-  return(read.table("uvoz/LaLiga.csv", sep = ",", as.is = TRUE,
-                      row.names = 1,
-                      col.names = c("obcina", "en", "dva", "tri", "stiri"),
-                      fileEncoding = "Windows-1250"))
-}
 
-# Zapišimo podatke v razpredelnico druzine.
-podatki <- podatki()
+
+
+# Zapišimo podatke v razpredelnico
+require(csvread)
+
+podatki <- read.csv(file = "LaLiga.csv")
 require(rmarkdown)
 require(shiny)
 names(podatki)[4] <- "Wins"
@@ -20,8 +18,11 @@ names(podatki)[7] <- "Goals For"
 names(podatki)[8] <- "Goals Against"
 names(podatki)[9] <- "Goal Difference"
 names(podatki)[10] <- "Points"
-
-
+podatki$Qualification.or.relegation <- NULL
+names(podatki)[1] <- "Position"
+names(podatki)[3] <- "Played"
+podatki$'Win/Lose' <- podatki$Wins/podatki$Loses
+summary(podatki)
 
 # Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi
 # potrebovali v 3. fazi, bi bilo smiselno funkcije dati v svojo
