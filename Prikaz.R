@@ -1,8 +1,10 @@
-library(ggplot2)
-library(dplyr)
 library(knitr)
+library(dplyr)
+library(ggplot2)
+library(ggvis)
+
 library(shiny)
 library(rmarkdown)
 fill_golrazlika <- c(podatki$`Goal Difference` + 50)
-Prikaz <- ggplot(data=podatki) + aes(x=Position, y=Points, fill=fill_golrazlika) + geom_smooth()
+Prikaz <- ggplot(data=podatki) + aes(x=Position, y=Points, fill=fill_golrazlika) + geom_line()
 View(Prikaz)
