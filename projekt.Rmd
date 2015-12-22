@@ -1,11 +1,11 @@
 ---
 title: "Poročilo pri predmetu Analiza podatkov s programom R"
-author: "Študent FMF"
+author: "Žan Šifrer"
 output:
   pdf_document:
-    latex_engine: xelatex
     includes:
       in_header: lib/styles.sty
+    latex_engine: xelatex
 ---
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE}
@@ -19,7 +19,14 @@ source("lib/libraries.r", encoding = "UTF-8")
 
 # Izbira teme
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+Analiza podatkov LaLige v letu 2014/15
+
+Analiziral bom špansko prvo nogometno ligo LaLigo. Iz podatkov bom ugotovil kakšne so razlike med ekipami v njej, katere ekipe povprečno dajejo več golov, katere več tvegajo. Analiziral bom kakšna so razmerja med zmagami in porazi pri ekipah in katere ekipe bolje igrajo na začetku sezone, katere na koncu in kakšno gol razliko dosežejo. 
+
+Podatke si bom pridobil na spletu:
+
+    http://www.soccerstats.com/latest.asp?league=spain_2015
+    https://en.wikipedia.org/wiki/2014%E2%80%9315_La_Liga
 
 ***
 
@@ -28,20 +35,27 @@ Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
 ```{r uvoz, echo=FALSE}
 source("uvoz/uvoz.r", encoding = "UTF-8")
 ```
+Uvozil sem podatke iz spletnih strani tako da sem lestvico in pozicije po posameznih krogih v sezoni prekopiral v excel in shranil v csv formatu, saj so bile lestvice večinoma na takih spletnih straneh kjer nisem mogel direktno dobiti samo tabele. Nato sem tabelo prevedel in premenil imena stolpcev tako da je razvidno kaj prikazuje vsak stolpec. V tabeli podatki imam lestvico ekip iz lanskoletne LaLige po vrsti glede na točke. V njej so podatki koliko tekem so odigrali, koliko so dosegli zmag, izenačenih izidov in porazov, koliko so dali golov in koliko dobili in tudi razliko med danimi in dobljenimi goli, nazadnje pa še točke po katerih se seveda odloča o lestvici.
 
-Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Poglejmo si začetka obeh uvoženih razpredelnic.
-
-```{r razpredelnice}
-kable(head(druzine))
-head(obcine)
+Dodal sem stolpce z razmerjem med zmagami in porazi, koliko golov je na njihovih tekmah in v koliko procentih igrajo izenačen izid.
+```{r podatki}
+podatki[c(2,3,4,5,6,7,8,9)]
 ```
 
-Slika \ref{fig:histogram} prikazuje porazdelitev števila naselij v občinah.
+```{r razpredelnice}
+#kable(head(druzine))
+
+```
+
+```{r točke in gol razlika}
+ggplot(data=podatki , aes(x=Position,y=Points))+ geom_point(aes(size= fillgolrazlika),colour="red")
+```
+
+Graf prikazuje 
 
 ```{r histogram, echo=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-hist(obcine[,4], main = "Pogostost števila naselij",
-     xlab = "Število naselij", ylab = "Število občin")
+#hist(obcine[,4], main = "Pogostost števila naselij",
+ #    xlab = "Število naselij", ylab = "Število občin")
 ```
 
 ***
@@ -49,16 +63,16 @@ hist(obcine[,4], main = "Pogostost števila naselij",
 # Analiza in vizualizacija podatkov
 
 ```{r vizualizacija, echo=FALSE}
-source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
+#source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
 
 Slika \ref{fig:zemljevid} prikazuje povprečno velikost družine za vsako občino.
 
 ```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-n <- 100
-barve <- topo.colors(n)[1+(n-1)*(druzine$povprecje-min.povprecje)/(max.povprecje-min.povprecje)]
-plot(zemljevid, col = barve)
-title("Povprečno število otrok v družini")
+#n <- 100
+#barve <- topo.colors(n)[1+(n-1)*(druzine$povprecje-min.povprecje)/(max.povprecje-min.povprecje)]
+#plot(zemljevid, col = barve)
+#title("Povprečno število otrok v družini")
 ```
 
 ***
@@ -66,20 +80,20 @@ title("Povprečno število otrok v družini")
 # Napredna analiza podatkov
 
 ```{r analiza, echo=FALSE}
-source("analiza/analiza.r", encoding = "UTF-8")
+#source("analiza/analiza.r", encoding = "UTF-8")
 ```
 
 Slika \ref{fig:graf} prikazuje povezavo med številom naselij in površino občine.
 
 ```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-plot(obcine[[1]], obcine[[4]],
-     main = "Število naselij glede na površino občine",
-     xlab = expression("Površina (km"^2 * ")"),
-     ylab = "Št. naselij",
-     col = barve[obcine[[7]]],
-     pch = 18)
-legend("topright", legend = names(barve), col = barve,
-       pch = 18, cex = 0.5, bg = "white")
+#plot(obcine[[1]], obcine[[4]],
+ #    main = "Število naselij glede na površino občine",
+#     xlab = expression("Površina (km"^2 * ")"),
+ #    ylab = "Št. naselij",
+  #   col = barve[obcine[[7]]],
+   #  pch = 18)
+#legend("topright", legend = names(barve), col = barve,
+ #      pch = 18, cex = 0.5, bg = "white")
 ```
 
 ***

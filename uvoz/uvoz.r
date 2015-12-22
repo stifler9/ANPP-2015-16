@@ -22,7 +22,9 @@ podatki$Qualification.or.relegation <- NULL
 names(podatki)[1] <- "Position"
 names(podatki)[3] <- "Played"
 podatki$'Win/Lose' <- podatki$Wins/podatki$Loses
+podatki$'Goals per match' <- (podatki$`Goals For`+podatki$`Goals Against`)/podatki$Played
 summary(podatki)
+
 
 # Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi
 # potrebovali v 3. fazi, bi bilo smiselno funkcije dati v svojo
