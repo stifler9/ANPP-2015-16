@@ -62,8 +62,10 @@ Pri naslednjem grafu je prikazano razmerje med zmagami in porazi, debelina črt 
 ```{r dani goli proti prejetim}
 FA = podatki$'Goals For'/podatki$'Goals Against'
 gpm = podatki$`Goals per match`
-ggplot(data=podatki , aes(x=Position,y=FA))+ geom_line(aes(size=gpm,color="blue"))
+ggplot(data=podatki , aes(x=Position,y=FA))+ geom_line(aes(size=gpm,color="blue"))+ geom_line(aes(y=1))
 ```
+
+Analiziral sem tudi koliko ekipe dajejo golov, ko prejmejo enega. debelina črte predstavlja koliko golov je povprečno na tekmo. Ponovno se vidi kako vodilne ekipe izstopajo iz povprečja namreč vodilna Barcelona je v povprečju dala več kot 5 golov na enega prejetega. Do 7-ega mesta to razmerje močno pada od tam naprej pa imajo ekipe manj danih golov kot prejetih. Razvidno je tudi da je najmanj golov na tekmo pri ekipah najbljižjim razmerju 1, glede na to se mi tudi zdi da take ekipe najmanj tvegajo.
 
 
 
