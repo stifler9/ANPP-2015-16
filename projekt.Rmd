@@ -38,28 +38,28 @@ source("uvoz/uvoz.r", encoding = "UTF-8")
 Uvozil sem podatke iz spletnih strani tako da sem lestvico in pozicije po posameznih krogih v sezoni prekopiral v excel in shranil v csv formatu, saj so bile lestvice večinoma na takih spletnih straneh kjer nisem mogel direktno dobiti samo tabele. Nato sem tabelo prevedel in premenil imena stolpcev tako da je razvidno kaj prikazuje vsak stolpec. V tabeli podatki imam lestvico ekip iz lanskoletne LaLige po vrsti glede na točke. V njej so podatki koliko tekem so odigrali, koliko so dosegli zmag, izenačenih izidov in porazov, koliko so dali golov in koliko dobili in tudi razliko med danimi in dobljenimi goli, nazadnje pa še točke po katerih se seveda odloča o lestvici.
 
 Dodal sem stolpce z razmerjem med zmagami in porazi, koliko golov je na njihovih tekmah in v koliko procentih igrajo izenačen izid.
-```{r podatki}
+```{r podatki, echo=FALSE}
 podatki[c(2,3,4,5,6,9)]
 ```
 
-```{r razpredelnice}
+```{r razpredelnice, echo=FALSE}
 #kable(head(druzine))
 
 ```
 
-```{r točke in gol razlika}
+```{r točke in gol razlika, echo=FALSE}
 ggplot(data=podatki , aes(x=Position,y=Points))+ geom_point(aes(size= fillgolrazlika),colour="red")
 ```
 
 Graf prikazuje koliko točk so dosegle ekipe po vrsti in velikost točk nam pove kako dobro gol razliko so dosegli. iz njega lahko razberemo kako se ekipe razlikujejo od najboljše do najslabše, videti je da Barcelona in Real madrid dosti izstopata od ostalih ekip, namreč Real Madrid je 14 točk pred tretjeuvrščenim Atletico Madridom, ki pa je skupaj z Valencio in Sevillio tudi dosti oddaljen od ostalih ekip, ki nekako enakomerno padajo. Vidi se tudi da gol razlike pribljižno enakomerno padajo, razen pri zadnjih 7ih ekipah nekako nihajo.
 
-```{r zmage proti porazom}
+```{r zmage proti porazom, echo=FALSE}
 ggplot(data=podatki , aes(x=Position,y=Wins/Loses))+ geom_line(aes(size=Draws/Played))
 ```
 
 Pri naslednjem grafu je prikazano razmerje med zmagami in porazi, debelina črt pa je delež izenačenih izidov. kot vidimo v temu razmerju kar močno izstopa vodilna ekipa Barcelona, Real Madrid je za njo samo 2 točki, ampak ker imajo vodilne ekipe veliko zmag in malo porazov sta 2 poraza več povzročila tak padec, imeli so pa najmanj izenačenih izidov, kar se tudi vidi po debelini črte. Atletico Madrid je imel slabše razmerje med zmagami in porazi od četrteuvrščene Valencie, ki je dosegla 1 zmago in en poraz manj. Do nekje 7-ga mesta je to razmerje močno padlo, pri ostalih ekipah pa so le manjše razlike.
 
-```{r dani goli proti prejetim}
+```{r dani goli proti prejetim, echo=FALSE}
 FA = podatki$'Goals For'/podatki$'Goals Against'
 gpm = podatki$`Goals per match`
 ggplot(data=podatki , aes(x=Position,y=FA))+ geom_line(aes(size=gpm,color="blue"))+ geom_line(aes(y=1))
