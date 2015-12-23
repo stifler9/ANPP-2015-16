@@ -21,8 +21,8 @@ names(podatki)[10] <- "Points"
 podatki$Qualification.or.relegation <- NULL
 names(podatki)[1] <- "Position"
 names(podatki)[3] <- "Played"
-podatki$'Win/Lose' <- podatki$Wins/podatki$Loses
-podatki$'Goals per match' <- (podatki$`Goals For`+podatki$`Goals Against`)/podatki$Played
+podatki$'Win/Lose' <- round(podatki$Wins/podatki$Loses,2)
+podatki$'Goals per match' <- round((podatki$`Goals For`+podatki$`Goals Against`)/podatki$Played,2)
 podatki$'Draw percentage' <- round((podatki$Draws/podatki$Played)*100, 2)
 summary(podatki)
 fillgolrazlika <- c(podatki$`Goal Difference` + 50)
