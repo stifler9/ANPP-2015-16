@@ -40,6 +40,8 @@ Uvozil sem podatke iz spletnih strani tako da sem lestvico in pozicije po posame
 Dodal sem stolpce z razmerjem med zmagami in porazi, koliko golov je na njihovih tekmah in v koliko procentih igrajo izenačen izid.
 ```{r podatki, echo=FALSE}
 kable(podatki[c(2,3,4,5,6,9,10,11,12)])
+kable(t(pozicije))
+
 ```
 
 ```{r razpredelnice, echo=FALSE}
