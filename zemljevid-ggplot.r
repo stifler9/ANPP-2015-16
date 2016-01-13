@@ -11,13 +11,12 @@ pretvori.zemljevid <- function(zemljevid) {
 
 # 1. Slovenske občine
 
-obcine <- uvozi.zemljevid("http://e-prostor.gov.si/fileadmin/BREZPLACNI_POD/RPE/OB.zip",
-                          "OB/OB", encoding = "Windows-1250")
-obcine$povrsina <- obcine$POVRSINA / 1000000
-ob <- pretvori.zemljevid(obcine)
+mesta <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/ESP_adm_shp.zip",
+                          "ESP_adm2", encoding = "UTF-8")
+mst <- pretvori.zemljevid(mesta)
 
 ## Zemljevid z barvami za površino
-zem <- ggplot() + geom_polygon(data = ob, aes(x=long, y=lat, group=group,
+zem <- ggplot() + geom_polygon(data = mst, aes(x=long, y=lat, group=group,
                                               fill=povrsina),
                                color = "grey") +
                   scale_fill_gradient(low="#3F7F3F", high="#00FF00") +

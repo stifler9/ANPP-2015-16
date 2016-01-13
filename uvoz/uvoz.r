@@ -27,6 +27,7 @@ podatki$'Draw percentage' <- round((podatki$Draws/podatki$Played)*100, 2)
 summary(podatki)
 fillgolrazlika <- c(podatki$`Goal Difference` + 50)
 pozicije <- read.csv(file="podatki/LaLiga_pozicije.csv", encoding = "Windows-1250")
+pozicije$povprečna <- round((pozicije$X1 + pozicije$X2 + pozicije$X3 + pozicije$X4 + pozicije$X5 + pozicije$X6 + pozicije$X7 + pozicije$X8 + pozicije$X9 + pozicije$X10 + pozicije$X11 + pozicije$X12 + pozicije$X13 + pozicije$X14 + pozicije$X15 + pozicije$X16 + pozicije$X17 + pozicije$X18 + pozicije$X19 + pozicije$X20 + pozicije$X21 + pozicije$X22 + pozicije$X23 + pozicije$X24 + pozicije$X25 + pozicije$X26 + pozicije$X28 + pozicije$X29 + pozicije$X30 + pozicije$X31 + pozicije$X32 + pozicije$X33 + pozicije$X34 + pozicije$X35 + pozicije$X36 + pozicije$X37 + pozicije$X38)/38,2)
 
 
 # Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi
