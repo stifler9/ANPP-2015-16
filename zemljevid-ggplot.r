@@ -16,11 +16,9 @@ mesta <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/ESP_adm_shp
 mst <- pretvori.zemljevid(mesta)
 
 ## Zemljevid z barvami za površino
-zem <- ggplot() + geom_polygon(data = mst, aes(x=long, y=lat, group=group,
-                                              fill=povrsina),
+zem <- ggplot() + geom_polygon(data = mst, aes(x=long, y=lat, group=group),
                                color = "grey") +
-                  scale_fill_gradient(low="#3F7F3F", high="#00FF00") +
-                  guides(fill = guide_colorbar(title = "Površina"))
+                  scale_fill_gradient(low="#3F7F3F", high="#00FF00")
 print(zem)
 
 ## Dodamo pike za mesta po tipu občine

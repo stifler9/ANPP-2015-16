@@ -9,9 +9,7 @@ output:
 ---
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE}
-# Če želimo nastaviti pisave v PDF-ju, odkomentiramo
-# in sledimo navodilom v programu.
-#source("fontconfig.r", encoding = "UTF-8")
+source("fontconfig.r", encoding = "UTF-8")
 
 # Uvoz vseh potrebnih knjižnic
 source("lib/libraries.r", encoding = "UTF-8")
@@ -49,6 +47,22 @@ kable(t(pozicije))
 
 ```
 
+
+
+
+```{r histogram, echo=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
+#hist(obcine[,4], main = "Pogostost števila naselij",
+ #    xlab = "Število naselij", ylab = "Število občin")
+```
+
+***
+
+# Analiza in vizualizacija podatkov
+
+```{r vizualizacija, echo=FALSE}
+#source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
+```
+
 ```{r točke in gol razlika, echo=FALSE}
 ggplot(data=podatki , aes(x=Position,y=Points))+ geom_point(aes(size= fillgolrazlika),colour="red")
 ```
@@ -69,22 +83,16 @@ ggplot(data=podatki , aes(x=Position,y=FA))+ geom_line(aes(size=gpm,color="blue"
 
 Analiziral sem tudi koliko ekipe dajejo golov, ko prejmejo enega. debelina črte predstavlja koliko golov je povprečno na tekmo. Ponovno se vidi kako vodilne ekipe izstopajo iz povprečja namreč vodilna Barcelona je v povprečju dala več kot 5 golov na enega prejetega. Do 7-ega mesta to razmerje močno pada od tam naprej pa imajo ekipe manj danih golov kot prejetih. Razvidno je tudi da je najmanj golov na tekmo pri ekipah najbljižjim razmerju 1, glede na to se mi tudi zdi da take ekipe najmanj tvegajo.
 
-
-
-```{r histogram, echo=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-#hist(obcine[,4], main = "Pogostost števila naselij",
- #    xlab = "Število naselij", ylab = "Število občin")
+```{r povprečna pozicija, echo=FALSE}
+povp = pozicije$povprecna
+zac = pozicije$X1
+ggplot(data=podatki , aes(x=Position,y=povp))+ geom_point(aes(size=zac,color="red"))+ geom_line(aes(y=1)) + geom_smooth(method="lm")
 ```
 
-***
-
-# Analiza in vizualizacija podatkov
-
-```{r vizualizacija, echo=FALSE}
-#source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
+```{r zemljevid španije, echo=FALSE}
+source("vizualizacija/vizualizacija.r")
+print(zem1)
 ```
-
-Slika \ref{fig:zemljevid} prikazuje povprečno velikost družine za vsako občino.
 
 ```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
 #n <- 100
