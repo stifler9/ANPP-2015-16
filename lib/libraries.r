@@ -8,9 +8,6 @@ library(shiny)
 library(rmarkdown)
 
 
-library(ggplot2)
-library(dplyr)
-
 
 # Uvozimo funkcije za delo z datotekami XML.
  source("lib/xml.r", encoding = "UTF-8")
@@ -29,9 +26,17 @@ pretvori.zemljevid <- function(zemljevid) {
 }
 
 mesta <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/ESP_adm_shp.zip",
-                         "ESP_adm1", encoding = "UTF-8")
-mesta$Pozicija <- podatki$Position
+                         "ESP_adm2", encoding = "UTF-8")
+m1 <- match(mesta$NAME_2, podatki$Team)
+mesta$points <- podatki$Points[m1]
+mesta$gol_tekma <- podatki$`Goals per match`[m1]
 mst <- pretvori.zemljevid(mesta)
-zem1 <- ggplot() + geom_polygon(data = mst, aes(x=long, y=lat, group = group),
-                                color = "grey", title = "Spain", fill=Pozicija) + xlim(-10, 5) + ylim(35, 45)
+zem1 <- ggplot() + geom_polygon(data = mst, aes(x=long, y=lat, group = group, fill=points),
+                                color = "grey", title = "Spain") + xlim(-10, 5) + ylim(35, 45)
   scale_fill_continuous(low = "#69b8f6", high = "#142d45")
+
+  
+
+zem2 <- zem1 + geom_point(data=mst, aes(x = long, y = lat, group = group, size=gol_tekma),color="green")
+
+  

@@ -7,9 +7,11 @@ output:
       in_header: lib/styles.sty
     latex_engine: xelatex
 ---
-
+```{r uvoz, echo=FALSE}
+source("uvoz/uvoz.r", encoding = "UTF-8")
+```
 ```{r setup, echo=FALSE, results='hide', message=FALSE}
-source("fontconfig.r", encoding = "UTF-8")
+# source("fontconfig.r", encoding = "UTF-8")
 
 # Uvoz vseh potrebnih knjižnic
 source("lib/libraries.r", encoding = "UTF-8")
@@ -30,9 +32,7 @@ Podatke si bom pridobil na spletu:
 
 # Obdelava, uvoz in čiščenje podatkov
 
-```{r uvoz, echo=FALSE}
-source("uvoz/uvoz.r", encoding = "UTF-8")
-```
+
 Uvozil sem podatke iz spletnih strani tako da sem lestvico in pozicije po posameznih krogih v sezoni prekopiral v excel in shranil v csv formatu, saj so bile lestvice večinoma na takih spletnih straneh kjer nisem mogel direktno dobiti samo tabele. Nato sem tabelo prevedel in premenil imena stolpcev tako da je razvidno kaj prikazuje vsak stolpec. V tabeli podatki imam lestvico ekip iz lanskoletne LaLige po vrsti glede na točke. V njej so podatki koliko tekem so odigrali, koliko so dosegli zmag, izenačenih izidov in porazov, koliko so dali golov in koliko dobili in tudi razliko med danimi in dobljenimi goli, nazadnje pa še točke po katerih se seveda odloča o lestvici.
 
 Dodal sem stolpce z razmerjem med zmagami in porazi, koliko golov je na njihovih tekmah in v koliko procentih igrajo izenačen izid.
@@ -85,14 +85,25 @@ Analiziral sem tudi koliko ekipe dajejo golov, ko prejmejo enega. debelina črte
 
 ```{r povprečna pozicija, echo=FALSE}
 povp = pozicije$povprecna
-zac = pozicije$X1
+zac = (pozicije$X1+pozicije$X2 + pozicije$X3)/3
 ggplot(data=podatki , aes(x=Position,y=povp))+ geom_point(aes(size=zac,color="red"))+ geom_line(aes(y=1)) + geom_smooth(method="lm")
 ```
 
-```{r zemljevid španije, echo=FALSE}
-source("vizualizacija/vizualizacija.r")
+Na temu grafu sem prikazal povprečno pozicijo ekip skozi sezono. velikost točk nam predstavlja na kateri poziciji so bili na začetku sezone(povprečna pozicija po prvih 3h tekmah). Povprečna pozicija ekip očitno ne bo šla do 20, saj zadnje ekipe niso bile ves čas na isti poziciji. Povprečne pozicije gredo do 18,5 zato so povprečno ekipe malo bolj nad linearno krivuljo. Kot vidimo so prve ekipe že na začetku bile bolj v ospredju medtem ko so zadnje veliko bolj pomešane. 
+
+```{r zemljevid točke, echo=FALSE, warning=FALSE}
+# source("vizualizacija/vizualizacija.r")
 print(zem1)
 ```
+Uvozil sem tudi zemljevid, na katerem sem z barvo predstavil točke, ki so jih klubi dosegli. Vseh mest mi ni uspelo povezati z ekipami v razpredelnici, zato sem naredil samo za tiste, ki mi jih je. Kot vidimo v sredini je Madrid in na severovzhodu je Barcelona, ki imata največ točk, po zemljevidu navzdol pa točke malce padajo.
+
+```{r zemljevid goli na tekmo, echo=FALSE}
+print(zem2)
+```
+
+Pri naslednjem zemljevidu sem prvemu dodal točke, kjer velikost predstavlja koliko imajo povprečno golov na tekmo. Točke so se dodale na vse točke na meji in je nastalo kot obroba.
+
+
 
 ```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
 #n <- 100
