@@ -30,13 +30,17 @@ mesta <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/ESP_adm_shp
 m1 <- match(mesta$NAME_2, podatki$Team)
 mesta$points <- podatki$Points[m1]
 mesta$gol_tekma <- podatki$`Goals per match`[m1]
+mesta$pol <- pozicije$X19[m1]
 mst <- pretvori.zemljevid(mesta)
 zem1 <- ggplot() + geom_polygon(data = mst, aes(x=long, y=lat, group = group, fill=points),
-                                color = "grey", title = "Spain") + xlim(-10, 5) + ylim(35, 45)
-  scale_fill_continuous(low = "#69b8f6", high = "#142d45")
+                                color = "grey") + xlim(-10, 5) + ylim(35, 45) +
+    scale_fill_continuous(low = "#69b8f6", high = "#142d45") + ggtitle("Spain")
 
+zem3 <- ggplot() + geom_polygon(data = mst, aes(x=long, y=lat, group = group, fill=pol),
+                                       color = "grey") + xlim(-10, 5) + ylim(35, 45) +
+       scale_fill_continuous(low = "#69b8f6", high = "#142d45") + ggtitle("Spain")
   
 
-zem2 <- zem1 + geom_point(data=mst, aes(x = long, y = lat, group = group, size=gol_tekma),color="green")
-
+zem2 <- zem3 + geom_point(data = mst %>% group_by(id, gol_tekma) %>% summarise(x = mean(long), y = mean(lat)),
+                  aes(x = x, y = y, size=gol_tekma),color="green")
   

@@ -7,7 +7,7 @@
 # Zapišimo podatke v razpredelnico
 require(csvread)
 
-podatki <- read.csv(file = "LaLiga.csv")
+podatki <- read.csv(file = "uvoz/LaLiga.csv",encoding = "UTF-8")
 require(rmarkdown)
 require(shiny)
 names(podatki)[4] <- "Wins"

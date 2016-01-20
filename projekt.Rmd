@@ -101,7 +101,9 @@ Uvozil sem tudi zemljevid, na katerem sem z barvo predstavil točke, ki so jih k
 print(zem2)
 ```
 
-Pri naslednjem zemljevidu sem prvemu dodal točke, kjer velikost predstavlja koliko imajo povprečno golov na tekmo. Točke so se dodale na vse točke na meji in je nastalo kot obroba.
+Pri naslednjem zemljevidu sem z barvo predstavil pozicijo ekip ob prvi polovici sezone, temu pa sem dodal točke, kjer velikost predstavlja koliko imajo povprečno golov na tekmo. Goli na tekmo so razmeroma podobni pozicijam, ki so jih klubi dobili ob polovici sezone. Vidimo da so klubi na jugu slabše uvrščeni in dosegajo manjše število golov na tekmo. To so recimo Almeria, Cordoba, Granada.
+
+Za napredno analizo bi lahko analiziral katere ekipe več tvegajo npr. glede na to kakšno gol razliko imajo in ali so v boju za obstanek ali v boji za vodilne ekipe. Kako se ekipe med sabo razlikujejo torej ali so velike ali majhne razlike, kaj lahko predvidevamo za naslednjo sezono.
 
 
 
