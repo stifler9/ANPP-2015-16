@@ -31,6 +31,7 @@ m1 <- match(mesta$NAME_2, podatki$Team)
 mesta$points <- podatki$Points[m1]
 mesta$gol_tekma <- podatki$`Goals per match`[m1]
 mesta$pol <- pozicije$X19[m1]
+mesta$povprecje <- pozicije$povprecna[m1]
 mst <- pretvori.zemljevid(mesta)
 zem1 <- ggplot() + geom_polygon(data = mst, aes(x=long, y=lat, group = group, fill=points),
                                 color = "grey") + xlim(-10, 5) + ylim(35, 45) +
