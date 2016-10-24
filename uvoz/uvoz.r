@@ -33,12 +33,12 @@ pozicije$povprečna <- round((pozicije$X1 + pozicije$X2 + pozicije$X3 + pozicije
 fnk_Barcelona <- pozicije[1,c(0,-1)]
 k_bar=0
 n_bar=0
-for(i in 1:18){k_bar = k_bar+((fnk_Barcelona[1,i + 1] - fnk_Barcelona[1,i]))/18;n_bar = n_bar + ((-(fnk_Barcelona[1,i + 1] - fnk_Barcelona[1,i])*i + fnk_Barcelona[1,i]))/18}
+for(i in 1:19){k_bar = k_bar+((fnk_Barcelona[1,i + 1] - fnk_Barcelona[1,i]))/18;n_bar = n_bar + ((-(fnk_Barcelona[1,i + 1] - fnk_Barcelona[1,i])*i + fnk_Barcelona[1,i]))/18}
 
 fnk_Real <- pozicije[2,c(0,-1)]
 k_real=0
 n_real=0
-for(i in 1:18){k_real = k_real+((fnk_Real[1,i + 1] - fnk_Real[1,i]))/18;n_real = n_real + ((-(fnk_Real[1,i + 1] - fnk_Real[1,i])*i + fnk_Real[1,i]))/18}
+for(i in 1:19){k_real = k_real+((fnk_Real[1,i + 1] - fnk_Real[1,i]))/18;n_real = n_real + ((-(fnk_Real[1,i + 1] - fnk_Real[1,i])*i + fnk_Real[1,i]))/18}
 
 
 # Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi

@@ -119,7 +119,10 @@ Za napredno analizo bi lahko analiziral katere ekipe več tvegajo npr. glede na 
 # Napredna analiza podatkov
 
 ```{r analiza, echo=FALSE}
-#source("analiza/analiza.r", encoding = "UTF-8")
+source("analiza/analiza.r", encoding = "UTF-8")
+source("analiza/server.r", encoding = "UTF-8")
+source("analiza/ui.r", encoding = "UTF-8")
+shinyAppDir("shiny", options=list(width="100%", height=500))
 ```
 
 Slika \ref{fig:graf} prikazuje povezavo med številom naselij in površino občine.
