@@ -76,8 +76,8 @@ ggplot(data=podatki , aes(x=Position,y=Wins/Loses))+ geom_line(aes(size=Draws/Pl
 Pri naslednjem grafu je prikazano razmerje med zmagami in porazi, debelina črt pa je delež izenačenih izidov. kot vidimo v temu razmerju kar močno izstopa vodilna ekipa Barcelona, Real Madrid je za njo samo 2 točki, ampak ker imajo vodilne ekipe veliko zmag in malo porazov sta 2 poraza več povzročila tak padec, imeli so pa najmanj izenačenih izidov, kar se tudi vidi po debelini črte. Atletico Madrid je imel slabše razmerje med zmagami in porazi od četrteuvrščene Valencie, ki je dosegla 1 zmago in en poraz manj. Do nekje 7-ga mesta je to razmerje močno padlo, pri ostalih ekipah pa so le manjše razlike.
 
 ```{r dani goli proti prejetim, echo=FALSE}
-FA = podatki$'Goals For'/podatki$'Goals Against'
-gpm = podatki$`Goals per match`
+FA = podatki$'Goals_For'/podatki$'Goals_Against'
+gpm = podatki$`Goals_per_match`
 ggplot(data=podatki , aes(x=Position,y=FA))+ geom_line(aes(size=gpm,color="blue"))+ geom_line(aes(y=1))
 ```
 
@@ -118,24 +118,16 @@ Za napredno analizo bi lahko analiziral katere ekipe več tvegajo npr. glede na 
 
 # Napredna analiza podatkov
 
+Naredil sem še krajši sistem napovedi za kluba Barcelona(z rdečo) in Real Madrid(z modro). v sistemu sem izračunal povrečno linijo ekip kakšne imajo pozicije skozi leto in to do 22. tekme.
 ```{r analiza, echo=FALSE}
-source("analiza/analiza.r", encoding = "UTF-8")
-source("analiza/server.r", encoding = "UTF-8")
-source("analiza/ui.r", encoding = "UTF-8")
-shinyAppDir("shiny", options=list(width="100%", height=500))
+print(napoved)
 ```
 
-Slika \ref{fig:graf} prikazuje povezavo med številom naselij in površino občine.
 
-```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-#plot(obcine[[1]], obcine[[4]],
- #    main = "Število naselij glede na površino občine",
-#     xlab = expression("Površina (km"^2 * ")"),
- #    ylab = "Št. naselij",
-  #   col = barve[obcine[[7]]],
-   #  pch = 18)
-#legend("topright", legend = names(barve), col = barve,
- #      pch = 18, cex = 0.5, bg = "white")
+
+```{r analiza, echo=FALSE}
+shinyAppDir("analiza", options=list(width="100%", height=500))
 ```
+
 
 ***

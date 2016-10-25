@@ -29,7 +29,7 @@ mesta <- uvozi.zemljevid("http://biogeo.ucdavis.edu/data/gadm2.8/shp/ESP_adm_shp
                          "ESP_adm2", encoding = "UTF-8")
 m1 <- match(mesta$NAME_2, podatki$Team)
 mesta$points <- podatki$Points[m1]
-mesta$gol_tekma <- podatki$`Goals per match`[m1]
+mesta$gol_tekma <- podatki$`Goals_per_match`[m1]
 mesta$pol <- pozicije$X19[m1]
 mesta$povprecje <- pozicije$povprecna[m1]
 mst <- pretvori.zemljevid(mesta)
