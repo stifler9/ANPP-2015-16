@@ -1,23 +1,13 @@
 library(shiny)
 
-shinyUI(fluidPage(
-  
-  titlePanel("Slovenske občine"),
-  
-  tabsetPanel(
-      tabPanel("Velikost družine",
-               DT::dataTableOutput("druzine")),
-      
-      tabPanel("Število naselij",
-               sidebarPanel(
-                  uiOutput("pokrajine")
-                ),
-               mainPanel(plotOutput("naselja"))),
-      
-      tabPanel("Zemljevid",
-               plotOutput("zemljevid")),
-      
-      tabPanel("Število naselij in površina",
-               plotOutput("povrsina"))
+shinyUI(
+  ui <- fluidPage(
+    
+    titlePanel("Analiza pozicij ekip skozi leto"),
+    tabsetPanel(
+      tabPanel("Točke",
+               sliderInput(inputId="izenaceni",label="Draws",min=0,max=14,value=3,sep=""),
+               plotOutput("tocke"))
     )
-))
+  )
+)
