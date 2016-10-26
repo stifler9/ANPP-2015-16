@@ -1,7 +1,7 @@
 # 2. faza: Uvoz podatkov
 
 # Funkcija, ki uvozi podatke iz datoteke druzine.csv
-
+library(ggplot2)
 
 
 # Zapišimo podatke v razpredelnico
@@ -33,18 +33,18 @@ pozicije$povprecna <- round((pozicije$X1 + pozicije$X2 + pozicije$X3 + pozicije$
 fnk_Barcelona <- pozicije[1,c(0,-1)]
 k_bar=0
 n_bar=0
-for(i in 1:22){k_bar = k_bar+((fnk_Barcelona[1,i + 1] - fnk_Barcelona[1,i]))/22;n_bar = n_bar + (((fnk_Barcelona[1,i + 1] + fnk_Barcelona[1,i]))/44)}
+for(i in 1:22){k_bar = k_bar+((fnk_Barcelona[1,i + 1] - fnk_Barcelona[1,i]))/22;n_bar = n_bar + (fnk_Barcelona[1,i] +i*(fnk_Barcelona[1,i] - fnk_Barcelona[1,i+1]))/22}
 
 fnk_Real <- pozicije[2,c(0,-1)]
 k_real=0
 n_real=0
-for(i in 1:22){k_real = k_real+((fnk_Real[1,i + 1] - fnk_Real[1,i]))/22;n_real = n_real + (((fnk_Real[1,i + 1] + fnk_Real[1,i]))/44)}
+for(i in 1:22){k_real = k_real+((fnk_Real[1,i + 1] - fnk_Real[1,i]))/22;n_real = n_real + (fnk_Real[1,i] + i*(fnk_Real[1,i] - fnk_Real[1,i+1]))/22}
 
 pozi <- data.frame(row.names = c("T1", "T36"))
 pozi$Bar <- c(n_bar + k_bar, n_bar + 36*k_bar)
 pozi$Real <- c(n_real + k_real, n_real + 36*k_real)
 
-napoved <- ggplot(data=pozi) + geom_smooth(method="lm", aes(x=c(1,36),y=Bar), color="Red") + geom_line(aes(x=c(1,36),y=Real), color="Blue") + ylim(-1,8) + xlim(1,37) +xlab("") + ylab("")
+napoved <- ggplot(data=pozi) + geom_smooth(method="lm", aes(x=c(1,36),y=Bar), color="Red") + geom_line(aes(x=c(1,36),y=Real), color="Blue") + ylim(0,7) + xlim(1,37) +xlab("") + ylab("")
 
 
 

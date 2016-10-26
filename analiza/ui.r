@@ -8,8 +8,8 @@ shinyUI(
                plotOutput("tocke")),
       
       tabPanel("Goli na tekmo",
-               sliderInput(inputId="zmage",label="Zmage/porazi",min=0,max=6.5,value=1.0,sep=""),
-               plotOutput("goli na tekmo"))
+               sliderInput(inputId="zmage",label="Zmage/porazi",min=0,max=5.1,value=1.0,sep=""),
+               plotOutput("goli"))
     )
   )
 )
