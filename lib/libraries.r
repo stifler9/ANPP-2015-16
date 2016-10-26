@@ -43,4 +43,12 @@ zem3 <- ggplot() + geom_polygon(data = mst, aes(x=long, y=lat, group = group, fi
 
 zem2 <- zem3 + geom_point(data = mst %>% group_by(id, gol_tekma) %>% summarise(x = mean(long), y = mean(lat)),
                   aes(x = x, y = y, size=gol_tekma),color="green")
+
+require(dplyr)
+require(rvest)
+require(gsubfn)
+require(reshape2)
+require(ggplot2)
+require(mgcv)
+require(shiny)
   

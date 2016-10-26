@@ -9,7 +9,6 @@ require(csvread)
 
 podatki <- read.csv(file = "uvoz/LaLiga.csv",encoding = "UTF-8")
 require(rmarkdown)
-require(shiny)
 names(podatki)[4] <- "Wins"
 names(podatki)[5] <- "Draws"
 names(podatki)[6] <- "Loses"

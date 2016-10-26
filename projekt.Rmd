@@ -104,17 +104,13 @@ Naredil sem še krajši sistem napovedi za kluba Barcelona(z rdečo) in Real Mad
 print(napoved)
 ```
 
-```{r anl, echo=FALSE}
-source("analiza/analiza.r", encoding = "UTF-8")
-```
-
 Nazadnje sem še ustvaril aplikacijo shiny.
 V prvem zavihku sem predstavil vizualizacijo ekip katere imajo več izenačenih izidov. Na drsniku izberemo najmanjše število izenačenih izidov, za klube, da jih pokaže. Na grafu pa je razvidno katere ekipe to so in koliko so na koncu prvenstva imele točk. To se mi zdi dober način, da pogledamo, katere ekipe manj tvegajo, torej igrajo več izenačenih izidov in to so bolj klubi na sredini lestvice.
 
 V drugem zavihku sem predstavil s koliko golov na tekmo klubi povprečno igrajo. Na drsniku izberemo najmanjšpe razmerje ekip med zmagami in porazi, torej za večje razmerje izberemo boljše ekipe(povprečje vseh je 1). Tako vidimo ali boljše ekipe igrajo z več goli na tekmo ali ne.
 
-```{r shiny, echo=FALSE}
-shinyAppDir("analiza", options=list(width="100%", height=500))
+```{r shiny}
+shinyAppDir("shiny", options=list(width="100%", height=1350))
 ```
 
 
