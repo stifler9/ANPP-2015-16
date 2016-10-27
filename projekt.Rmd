@@ -7,6 +7,7 @@ output:
     includes:
       in_header: lib/styles.sty
     latex_engine: xelatex
+runtime: shiny
 ---
 ```{r uvoz, echo=FALSE}
 source("uvoz/uvoz.r", encoding = "UTF-8")
@@ -39,7 +40,7 @@ Uvozil sem podatke iz spletnih strani tako da sem lestvico in pozicije po posame
 Dodal sem stolpce z razmerjem med zmagami in porazi, koliko golov je na njihovih tekmah in v koliko procentih igrajo izenačen izid.
 ```{r podatki, echo=FALSE}
 kable(podatki[c(2,3,4,5,6,9,10,11,12)])
-kable(t(pozicije))
+kable(pozicije)
 
 ```
 
@@ -48,22 +49,19 @@ kable(t(pozicije))
 
 # Analiza in vizualizacija podatkov
 
-```{r vizualizacija, echo=FALSE}
-```
-
-```{r točke in gol razlika, echo=FALSE}
+```{r tocke_in_gol_razlika, echo=FALSE}
 ggplot(data=podatki , aes(x=Position,y=Points))+ geom_point(aes(size= fillgolrazlika),colour="red")
 ```
 
 Graf prikazuje koliko točk so dosegle ekipe po vrsti in velikost točk nam pove kako dobro gol razliko so dosegli. iz njega lahko razberemo kako se ekipe razlikujejo od najboljše do najslabše, videti je da Barcelona in Real madrid dosti izstopata od ostalih ekip, namreč Real Madrid je 14 točk pred tretjeuvrščenim Atletico Madridom, ki pa je skupaj z Valencio in Sevillio tudi dosti oddaljen od ostalih ekip, ki nekako enakomerno padajo. Vidi se tudi da gol razlike pribljižno enakomerno padajo, razen pri zadnjih 7ih ekipah nekako nihajo.
 
-```{r zmage proti porazom, echo=FALSE}
+```{r zmage_proti_porazom, echo=FALSE}
 ggplot(data=podatki , aes(x=Position,y=Wins/Loses))+ geom_line(aes(size=Draws/Played))
 ```
 
 Pri naslednjem grafu je prikazano razmerje med zmagami in porazi, debelina črt pa je delež izenačenih izidov. kot vidimo v temu razmerju kar močno izstopa vodilna ekipa Barcelona, Real Madrid je za njo samo 2 točki, ampak ker imajo vodilne ekipe veliko zmag in malo porazov sta 2 poraza več povzročila tak padec, imeli so pa najmanj izenačenih izidov, kar se tudi vidi po debelini črte. Atletico Madrid je imel slabše razmerje med zmagami in porazi od četrteuvrščene Valencie, ki je dosegla 1 zmago in en poraz manj. Do nekje 7-ga mesta je to razmerje močno padlo, pri ostalih ekipah pa so le manjše razlike.
 
-```{r dani goli proti prejetim, echo=FALSE}
+```{r dani_goli_proti_prejetim, echo=FALSE}
 FA = podatki$'Goals_For'/podatki$'Goals_Against'
 gpm = podatki$`Goals_per_match`
 ggplot(data=podatki , aes(x=Position,y=FA))+ geom_line(aes(size=gpm,color="blue"))+ geom_line(aes(y=1))
@@ -71,7 +69,7 @@ ggplot(data=podatki , aes(x=Position,y=FA))+ geom_line(aes(size=gpm,color="blue"
 
 Analiziral sem tudi koliko ekipe dajejo golov, ko prejmejo enega. debelina črte predstavlja koliko golov je povprečno na tekmo. Ponovno se vidi kako vodilne ekipe izstopajo iz povprečja namreč vodilna Barcelona je v povprečju dala več kot 5 golov na enega prejetega. Do 7-ega mesta to razmerje močno pada od tam naprej pa imajo ekipe manj danih golov kot prejetih. Razvidno je tudi da je najmanj golov na tekmo pri ekipah najbljižjim razmerju 1, glede na to se mi tudi zdi da take ekipe najmanj tvegajo.
 
-```{r povprečna pozicija, echo=FALSE}
+```{r povprecna_pozicija, echo=FALSE}
 povp = pozicije$povprecna
 zac = (pozicije$X1+pozicije$X2 + pozicije$X3)/3
 ggplot(data=podatki , aes(x=Position,y=povp))+ geom_point(aes(size=zac,color="red"))+ geom_line(aes(y=1)) + geom_smooth(method="lm")
@@ -79,12 +77,12 @@ ggplot(data=podatki , aes(x=Position,y=povp))+ geom_point(aes(size=zac,color="re
 
 Na temu grafu sem prikazal povprečno pozicijo ekip skozi sezono. velikost točk nam predstavlja na kateri poziciji so bili na začetku sezone(povprečna pozicija po prvih 3h tekmah). Povprečna pozicija ekip očitno ne bo šla do 20, saj zadnje ekipe niso bile ves čas na isti poziciji. Povprečne pozicije gredo do 18,5 zato so povprečno ekipe malo bolj nad linearno krivuljo. Kot vidimo so prve ekipe že na začetku bile bolj v ospredju medtem ko so zadnje veliko bolj pomešane. 
 
-```{r zemljevid točke, echo=FALSE, warning=FALSE}
+```{r zemljevid_tocke, echo=FALSE, warning=FALSE}
 print(zem1)
 ```
 Uvozil sem tudi zemljevid, na katerem sem z barvo predstavil točke, ki so jih klubi dosegli. Vseh mest mi ni uspelo povezati z ekipami v razpredelnici, zato sem naredil samo za tiste, ki mi jih je. Kot vidimo v sredini je Madrid in na severovzhodu je Barcelona, ki imata največ točk, po zemljevidu navzdol pa točke malce padajo.
 
-```{r zemljevid goli na tekmo, echo=FALSE}
+```{r zemljevid_goli_na_tekmo, echo=FALSE, warning=FALSE}
 print(zem2)
 ```
 
@@ -112,6 +110,4 @@ V drugem zavihku sem predstavil s koliko golov na tekmo klubi povprečno igrajo.
 ```{r shiny}
 shinyAppDir("shiny", options=list(width="100%", height=1350))
 ```
-
-
 ***
